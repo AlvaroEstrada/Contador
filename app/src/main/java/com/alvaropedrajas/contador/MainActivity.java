@@ -1,6 +1,8 @@
 package com.alvaropedrajas.contador;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,54 +35,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cb.setOnClickListener(this);
 
         tv_num.setText(cont.toString());
-        if (cont == 0 && !cb.isChecked()){
+        if (cont == 0 && !cb.isChecked()) {
             btnMinus.setEnabled(false);
         }
-        if (cont == 0 && cb.isChecked()){
+        if (cont == 0 && cb.isChecked()) {
             btnMinus.setEnabled(true);
         }
     }
 
-    public void up(){
+    public void up() {
         cont += 1;
         tv_num.setText(cont.toString());
         btnMinus.setEnabled(true);
     }
 
-    public void down(){
-        if (cont <= 0){
-            if (cb.isChecked()){
+    public void down() {
+        if (cont <= 0) {
+            if (cb.isChecked()) {
                 cont -= 1;
                 tv_num.setText(cont.toString());
-            }else{
+            } else {
                 btnMinus.setEnabled(false);
             }
         }
-        if (cont > 0){
+        if (cont > 0) {
             cont -= 1;
             tv_num.setText(cont.toString());
         }
     }
 
-    public void reset(){
-        if (!TextUtils.isEmpty(et_num.getText().toString())){
+    public void reset() {
+        if (!TextUtils.isEmpty(et_num.getText().toString())) {
             cont = Integer.parseInt(et_num.getText().toString());
             tv_num.setText(cont.toString());
-        }else{
+        } else {
             cont = 0;
             tv_num.setText(cont.toString());
         }
 
-        if (cont < 0){
+        if (cont < 0) {
             btnMinus.setEnabled(true);
             cb.setChecked(true);
-        }else{
+        } else {
             cb.setChecked(false);
         }
 
     }
 
-    @Override
+    /*@Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putInt("CONT", cont);
@@ -91,12 +93,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
         cont = savedInstanceState.getInt("CONT");
         tv_num.setText(String.valueOf(cont));
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences datos = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor miEditor = datos.edit();
+        miEditor.putInt("cuenta", cont);
+        miEditor.putBoolean("cb", cb.isChecked());
+        miEditor.apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences datos = PreferenceManager.getDefaultSharedPreferences(this);
+        cont = datos.getInt("cuenta", 0);
+        cb.setChecked(datos.getBoolean("cb", cb.isChecked()));
+        tv_num.setText("" + cont);
     }
 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnPlus:
                 up();
                 break;
