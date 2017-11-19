@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Contador</string>
+    <string name="app_name">Contador Material</string>
+    <string name="edtHint">Número a resetear</string>
+    <string name="contador">Contador:</string>
+    <string name="negativos">Negativos</string>
+    <string name="reset">Reestablecer</string>
+    <string name="tittle">Contador Material</string>
 </resources>
