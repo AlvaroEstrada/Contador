@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Material Counter</string>
+    <string name="edtHint">Number tu reset</string>
+    <string name="contador">Counter:</string>
+    <string name="negativos">Negative</string>
+    <string name="reset">Reset</string>
+    <string name="tittle">Material Counter</string>
+</resources>

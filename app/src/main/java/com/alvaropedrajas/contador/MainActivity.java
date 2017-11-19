@@ -25,11 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
 
 
-        setContentView(R.layout.activity_main);
         Button btnPlus = (Button) findViewById(R.id.btnPlus);
         btnMinus = (Button) findViewById(R.id.btnMinus);
         Button btnReset = (Button) findViewById(R.id.btnReset);
